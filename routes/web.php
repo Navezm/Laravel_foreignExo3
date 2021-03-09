@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Models\Profil;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $users = User::all();
+    $profils = Profil::all();
+    return view('welcome', compact('users', 'profils'));
 });
+
+Route::post('/createProfil', [UserController::class,'storeProfil']);
+Route::resource('users', UserController::class);
