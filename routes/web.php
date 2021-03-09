@@ -22,5 +22,4 @@ Route::get('/', function () {
     return view('welcome', compact('users', 'profils'));
 });
 
-Route::post('/createProfil', [UserController::class,'storeProfil']);
 Route::resource('users', UserController::class);

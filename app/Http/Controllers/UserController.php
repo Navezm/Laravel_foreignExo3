@@ -38,21 +38,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $newEntry = new User;
-        $newEntry->email = $request->email;
-        $newEntry->nickname = $request->nickname;
-        $newEntry->profil_id = $request->profil_id;
-        $newEntry->save();
-        return redirect()->back();
-    }
-
-    public function storeProfil(Request $request)
-    {
         $newEntry = new Profil;
         $newEntry->name = $request->name;
         $newEntry->age = $request->age;
         $newEntry->phone = $request->phone;
         $newEntry->save();
+
+        $store = new User;
+        $store->email = $request->email;
+        $store->nickname = $request->nickname;
+        $store->profil_id = $newEntry->id;
+        $store->save();
+
         return redirect()->back();
     }
 
